@@ -276,6 +276,7 @@ media/
 .ipython/
 .env
 .envs/*
+./env/
 
 
 ### Celery
