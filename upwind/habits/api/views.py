@@ -20,7 +20,7 @@ class HabitsListAPIView(ListCreateAPIView):
 class HabitAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = HabitSerializer
     lookup_field = 'id'
-    queryset = Habit.objects.all()
+
+    def get_queryset(self):
+        return Habit.objects.filter(user=self.request.user)
     
-
-

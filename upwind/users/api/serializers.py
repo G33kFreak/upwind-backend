@@ -1,6 +1,9 @@
+from django.db import transaction
 from rest_framework import serializers
 
 from users.models import User
+from users.services import UserActivationCreator
+
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -8,13 +11,14 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ['uuid', 'first_name', 'email', 'password']
 
-    def create(self) -> User:
-        return User.objects.create_user(
-            email=self.validated_data.get('email'),
-            password=self.validated_data.get('password'),
-            first_name=self.validated_data.get('first_name'),
-            is_active=False,
-        )
+    @transaction.atomic
+    def create(self, validated_data):
+        return UserActivationCreator(validated_data=validated_data)()
+
+    def validate(self, data):
+        super().validate(data)
+        self.create(data)
+        return data
 
 class UserDataSerializer(serializers.ModelSerializer):
     class Meta:

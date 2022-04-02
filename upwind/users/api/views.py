@@ -1,18 +1,22 @@
-from rest_framework.views import APIView
+from rest_framework import status
+
 from rest_framework.response import Response
-from rest_framework.generics import RetrieveAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import RetrieveAPIView, GenericAPIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from users.api.serializers import RegisterSerializer, UserDataSerializer
 
 
-class RegisterAPIView(APIView):
+class RegisterAPIView(GenericAPIView):
+
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
+    http_method_names = ["post"]
+
     def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.create()
-        user.save()
-        return Response(serializer.data)
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
 
 class UserDataAPIView(RetrieveAPIView):
