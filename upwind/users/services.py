@@ -43,7 +43,7 @@ class UserAcivator:
     def activate(self):
         try:
             user_activation_token = UserActivateToken.objects.active().get(
-                token=self.data["token"], user_email=self.data["email"]
+                token=self.data["token"], user__email=self.data["email"]
             )
         except (TypeError, ValueError, OverflowError, UserActivateToken.DoesNotExist):
             raise serializers.ValidationError({"token":"Invalid Token"})
