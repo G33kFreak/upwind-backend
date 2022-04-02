@@ -9,8 +9,12 @@ class HabitSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'name',
-            'time_spend_monthly',
-            'money_spend_monthly',
+            'time_spend_weekly',
+            'money_spend_weekly',
+            'days',
+            'start_date',
+            'saved_money',
+            'saved_time'
         ]
 
 
@@ -20,17 +24,22 @@ class HabitsCreateSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'name',
-            'time_spend_monthly',
-            'money_spend_monthly',
-            'user'
+            'time_spend_weekly',
+            'money_spend_weekly',
+            'user',
+            'start_date'
         ]
 
-class HabitsListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Habit
-        fields = [
-            'id',
-            'name',
-            'time_spend_monthly',
-            'money_spend_monthly',
-        ]
+# class HabitsListSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Habit
+#         fields = [
+#             'id',
+#             'name',
+#             'time_spend_weekly',
+#             'money_spend_weekly',
+#             'days',
+#             'start_date',
+#             'saved_money',
+#             'saved_time'
+#         ]
