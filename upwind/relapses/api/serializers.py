@@ -10,3 +10,12 @@ class RelapseSerializer(serializers.ModelSerializer):
             'datetime',
             'reason',
         ]
+
+class RelapseCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Relapse
+        fields = [
+            'reason',
+            'habit',
+            'user',
+        ]

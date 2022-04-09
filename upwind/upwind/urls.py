@@ -28,7 +28,8 @@ docs_urls = [
 
 api_urls = [
     path('', include('users.urls')),
-    path('', include('habits.urls'))
+    path('', include('habits.urls')),
+    path('', include('relapses.urls')),
 ]
 
 urlpatterns = [
