@@ -31,3 +31,4 @@ class Habit(models.Model):
     @property
     def saved_time(self) -> float:
         return value_saved(self.time_per_day, self.days)
+

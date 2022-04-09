@@ -3,6 +3,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from habits.api.serializers import HabitSerializer, HabitsCreateSerializer, HabitsListSerializer
 from habits.models import Habit
 
+
 class HabitsListAPIView(ListCreateAPIView):
     def get_queryset(self):
         return Habit.objects.filter(user=self.request.user)
@@ -17,10 +18,10 @@ class HabitsListAPIView(ListCreateAPIView):
         request.data['user'] = request.user.pk
         return super().create(request, *args, **kwargs)
 
+
 class HabitAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = HabitSerializer
     lookup_field = 'id'
-    
+
     def get_queryset(self):
         return Habit.objects.filter(user=self.request.user)
-    
