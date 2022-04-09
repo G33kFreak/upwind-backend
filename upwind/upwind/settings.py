@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'users',
     'jwt_auth',
-    'habits'
+    'habits',
+    'relapses'
 ]
 
 MIDDLEWARE = [
