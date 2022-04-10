@@ -9,7 +9,7 @@ from users.services import UserActivationCreator
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['uuid', 'first_name', 'email', 'password']
+        fields = ['first_name', 'email', 'password']
 
     @transaction.atomic
     def create(self, validated_data):
@@ -24,7 +24,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['uuid', 'email', 'first_name', 'is_active']
+        fields = ['email', 'first_name', 'is_active']
 
 
 class ActivateAccountSerializer(serializers.Serializer):

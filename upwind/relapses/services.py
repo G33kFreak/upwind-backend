@@ -24,7 +24,7 @@ class RelapseReportCreator:
             'date_end': self.validated_data.get('date_end'),
             'reasons_to_avoid': [relapse.as_json() for relapse in relapses],
             'percentage': percentage,
-            'weekdays_report':weekdays_report,
+            'weekdays_report': weekdays_report,
         }
 
     def get_relapses(self) -> list[Relapse]:
