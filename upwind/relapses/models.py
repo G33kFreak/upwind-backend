@@ -15,16 +15,10 @@ class Relapse(models.Model):
     )
     user = models.ForeignKey(User, on_delete=models.PROTECT)
 
-
-class RelapseReport(models.Model):
-    reason_to_avoid = models.CharField(max_length=255)
-    reason_percentage = models.FloatField(
-        validators=[
-            MinValueValidator(0.0),
-            MaxValueValidator(100.0),
-        ],
-    )
-    date_range_start = models.DateTimeField()
-    date_range_end = models.DateTimeField()
-
+    def as_json(self):
+        return dict(
+            datetime=self.datetime,
+            reason=self.reason,
+        )
+        
 
