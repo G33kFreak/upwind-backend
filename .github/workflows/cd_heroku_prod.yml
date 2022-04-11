@@ -1,0 +1,34 @@
+name: Push prod to heroku
+
+on:
+  push:
+    branches: [ master ]
+env:
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  APP_NAME: ${{ 'upwind-api' }}
+  REGISTRY: ${{ 'registry.heroku.com/upwind-api' }}
+
+jobs:
+  build:
+    name: Push to heroku
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install heroku CLI
+        run: |
+          ./docker/install_heroku_cli.sh
+      - name: Docker login
+        run: |
+          docker login --username="actions@github.com" --password=$HEROKU_API_KEY registry.heroku.com
+
+      - name: Docker build web
+        run: |
+          docker build -t $APP_NAME -f Dockerfile .
+          docker tag $APP_NAME $REGISTRY
+          docker push $REGISTRY
+      - name: Publish
+        run: |
+          heroku container:release web worker -a $APP_NAME
