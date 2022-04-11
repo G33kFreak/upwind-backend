@@ -1,8 +1,8 @@
 name: Push prod to heroku
 
-on:
-  push:
-    branches: [ master ]
+on: push
+  # push:
+  #   branches: [ master ]
 env:
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
   APP_NAME: ${{ 'upwind-api' }}
