@@ -19,7 +19,7 @@ jobs:
 
       - name: Install heroku CLI
         run: |
-          ./docker/install_heroku_cli.sh
+          ./install_heroku_cli.sh
       - name: Docker login
         run: |
           docker login --username="actions@github.com" --password=$HEROKU_API_KEY registry.heroku.com
