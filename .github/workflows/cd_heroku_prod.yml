@@ -31,4 +31,4 @@ jobs:
           docker push $REGISTRY
       - name: Publish
         run: |
-          heroku container:release web worker -a $APP_NAME
+          heroku container:release web -a $APP_NAME
