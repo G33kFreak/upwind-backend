@@ -26,9 +26,9 @@ jobs:
 
       - name: Docker build web
         run: |
-          docker build -t $APP_NAME -f Dockerfile .
-          docker tag $APP_NAME $REGISTRY
-          docker push $REGISTRY
+          docker build -t $APP_NAME/web -f Dockerfile .
+          docker tag $APP_NAME/web $REGISTRY/web
+          docker push $REGISTRY/web
       - name: Publish
         run: |
           heroku container:release web -a $APP_NAME
