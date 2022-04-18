@@ -1,8 +1,17 @@
-build:
+build-dev:
 	docker-compose build
 
-run:
+run-dev:
 	docker-compose up
 
-superuser:
+superuser-dev:
 	docker-compose run --rm web python manage.py createsuperuser
+
+build-prod:
+	docker-compose -f docker-compose.prod.yml build
+
+run-prod:
+	docker-compose -f docker-compose.prod.yml up
+
+superuser-prod:
+	docker-compose -f docker-compose.prod.yml run --rm web python manage.py createsuperuser

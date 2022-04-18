@@ -19,16 +19,16 @@ jobs:
 
       - name: Install heroku CLI
         run: |
-          ./install_heroku_cli.sh
+          bash ./install_heroku_cli.sh
       - name: Docker login
         run: |
           docker login --username="actions@github.com" --password=$HEROKU_API_KEY registry.heroku.com
 
       - name: Docker build web
         run: |
-          docker build -t $APP_NAME -f Dockerfile .
-          docker tag $APP_NAME $REGISTRY
-          docker push $REGISTRY
+          docker build -t $APP_NAME/web -f Dockerfile.prod .
+          docker tag $APP_NAME/web $REGISTRY/web
+          docker push $REGISTRY/web
       - name: Publish
         run: |
-          heroku container:release web worker -a $APP_NAME
+          heroku container:release web -a $APP_NAME
