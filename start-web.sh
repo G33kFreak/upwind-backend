@@ -6,4 +6,4 @@ set -o nounset
 
 python /app/manage.py migrate --noinput
 
-/usr/local/bin/gunicorn upwind.wsgi --bind 0.0.0.0:8000
+/usr/local/bin/gunicorn upwind.wsgi --bind 0.0.0.0:${PORT}
