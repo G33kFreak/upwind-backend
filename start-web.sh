@@ -6,4 +6,4 @@ set -o nounset
 
 python /app/manage.py migrate --noinput
 
-/usr/local/bin/gunicorn config.wsgi --bind ${HOST}:${PORT} --chdir=/app --preload
+/usr/local/bin/gunicorn upwind.wsgi --bind ${HOST}:${PORT}

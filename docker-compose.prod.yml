@@ -7,18 +7,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
-    image: uni_chat_ci
+    image: upwind-api
     depends_on:
       - postgres_ci
     environment:
       USE_DOCKER: "yes"
       DJANGO_ADMIN_URL: admin/
       DJANGO_SECRET_KEY: not_so_secret
-      DJANGO_SETTINGS_MODULE: config.settings.test
       DJANGO_DEFAULT_FILE_STORAGE: django.core.files.storage.FileSystemStorage
       DATABASE_URL: postgres://debug:debug@postgres_ci:5432/debug
       PORT: 8000
       HOST: 0.0.0.0
+      DEBUG: False
 
   postgres_ci:
     image: postgres
