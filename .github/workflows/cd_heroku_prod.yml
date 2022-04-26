@@ -31,7 +31,7 @@ jobs:
           docker push $REGISTRY/web
 
       - name: Tests
-        run: make testici
+        run: make test-ci
 
       - name: Publish
         run: |
