@@ -14,4 +14,10 @@ run-prod:
 	docker-compose -f docker-compose.prod.yml up
 
 superuser-prod:
-	docker-compose -f docker-compose.prod.yml run --rm web python manage.py createsuperuser
+	docker-compose -f docker-compose.prod.yml run --rm sut python manage.py createsuperuser
+
+test:
+	docker-compose run --rm web /test.sh
+
+test-ci:
+	docker-compose -f docker-compose.prod.yml run --rm sut /test.sh

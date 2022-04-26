@@ -13,6 +13,10 @@ COPY start-web.sh /
 RUN chmod +x /start-web.sh
 RUN chown django /start-web.sh
 
+COPY test.sh /
+RUN chmod +x /test.sh
+RUN chown django /test.sh
+
 COPY --chown=django:django . /app
 
 USER django
