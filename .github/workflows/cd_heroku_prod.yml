@@ -1,8 +1,8 @@
 name: Push prod to heroku
 
-on:
-  push:
-    branches: [ master ]
+on: push
+  # push:
+  #   branches: [ master ]
 env:
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
   APP_NAME: ${{ 'upwind-api' }}
@@ -29,6 +29,10 @@ jobs:
           docker build -t $APP_NAME/web -f Dockerfile.prod .
           docker tag $APP_NAME/web $REGISTRY/web
           docker push $REGISTRY/web
+
+      - name: Tests
+        run: make testici
+
       - name: Publish
         run: |
           heroku container:release web -a $APP_NAME
