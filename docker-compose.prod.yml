@@ -18,7 +18,7 @@ services:
       DATABASE_URL: postgres://debug:debug@postgres_ci:5432/debug
       PORT: 8000
       HOST: 0.0.0.0
-      DEBUG: False
+      DEBUG: false
 
   postgres_ci:
     image: postgres
