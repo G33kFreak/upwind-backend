@@ -1,8 +1,10 @@
-name: Push prod to heroku
+name: Running tests
 
 on:
-  push:
-    branches: [ master ]
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
 env:
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
   APP_NAME: ${{ 'upwind-api' }}
@@ -10,7 +12,7 @@ env:
 
 jobs:
   build:
-    name: Push to heroku
+    name: Running tests
     runs-on: ubuntu-latest
 
     steps:
@@ -20,6 +22,7 @@ jobs:
       - name: Install heroku CLI
         run: |
           bash ./install_heroku_cli.sh
+
       - name: Docker login
         run: |
           docker login --username="actions@github.com" --password=$HEROKU_API_KEY registry.heroku.com
@@ -30,6 +33,5 @@ jobs:
           docker tag $APP_NAME/web $REGISTRY/web
           docker push $REGISTRY/web
 
-      - name: Publish
-        run: |
-          heroku container:release web -a $APP_NAME
+      - name: Running tests
+        run: make test-ci

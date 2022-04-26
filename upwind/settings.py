@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b*92b+imelgbx-2b%010s-624=^h5i*1gs=6-!s+o_%wt=!249'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = ["upwind-api.herokuapp.com", '127.0.0.1']
 
