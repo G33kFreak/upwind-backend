@@ -1,7 +1,4 @@
-import datetime
-
 import factory.fuzzy
-from pytz import UTC
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password

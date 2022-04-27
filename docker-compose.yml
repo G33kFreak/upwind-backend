@@ -12,6 +12,8 @@ services:
     ports:
       - "54321:5432"
   web:
+    environment:
+      USE_DOCKER: "yes"
     env_file:
       - .env
     build: .
