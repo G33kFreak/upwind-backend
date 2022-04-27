@@ -1,12 +1,15 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import NotAuthenticated
 
 from relapses.api.serializers import RelapseSerializer, RelapseCreateSerializer, RelapseReportSerializer
 from relapses.models import Relapse
 
 
 class RelapseListAPIView(ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)
+
     def get_queryset(self):
         habit = self.request.data.get('habit', None)
         if habit == None:
@@ -21,11 +24,15 @@ class RelapseListAPIView(ListCreateAPIView):
             return RelapseSerializer
 
     def create(self, request, *args, **kwargs):
-        request.data['user'] = request.user.pk
-        return super().create(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            request.data['user'] = request.user.pk
+            return super().create(request, *args, **kwargs)
+        else:
+            raise NotAuthenticated()
 
 
 class RelapseAPIView(RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
     serializer_calss = RelapseSerializer
     lookup_field = 'id'
 
