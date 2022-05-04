@@ -22,7 +22,7 @@ def get_saved_time(habit: Habit) -> float:
 
 
 class HabitSerializer(serializers.ModelSerializer):
-    relapses = RelapseSerializer(many=True)
+    relapses = serializers.SerializerMethodField()
     saved_money = serializers.SerializerMethodField('get_saved_money')
     saved_time = serializers.SerializerMethodField('get_saved_time')
 
@@ -45,6 +45,10 @@ class HabitSerializer(serializers.ModelSerializer):
 
     def get_saved_time(self, habit: Habit):
         return get_saved_time(habit)
+
+    def get_relapses(self, instance):
+        relapses = instance.relapses.order_by('id').reverse()
+        return RelapseSerializer(relapses, many=True).data
 
 
 class HabitsCreateSerializer(serializers.ModelSerializer):
