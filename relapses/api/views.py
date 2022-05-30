@@ -42,10 +42,10 @@ class RelapseAPIView(RetrieveUpdateDestroyAPIView):
 
 class RelapseReportAPIView(GenericAPIView):
     permission_classes = (IsAuthenticated,)
-    http_method_names = ["get"]
+    http_method_names = ["post"]
     serializer_class = RelapseReportSerializer
 
-    def get(self, request, *arg, **kwargs):
+    def post(self, request, *arg, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         report = serializer.generate_report(request.user)
