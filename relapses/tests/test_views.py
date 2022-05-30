@@ -148,7 +148,7 @@ def test_general_relapse_report_ok(authenticated_api_client):
     }
 
     response = authenticated_api_client.generic(
-        'GET',
+        'POST',
         '/api/relapse/report/',
         data=json.dumps(data),
         content_type='application/json'
@@ -173,7 +173,7 @@ def test_general_relapse_report_wrong_data(authenticated_api_client):
     }
 
     response = authenticated_api_client.generic(
-        'GET',
+        'POST',
         '/api/relapse/report/',
         data=json.dumps(data),
         content_type='application/json'
@@ -194,7 +194,7 @@ def test_general_relapse_report_not_enough_data(authenticated_api_client):
     }
 
     response = authenticated_api_client.generic(
-        'GET',
+        'POST',
         '/api/relapse/report/',
         data=json.dumps(data),
         content_type='application/json'
